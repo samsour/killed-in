@@ -15,7 +15,7 @@ KilledIn is a browser extension designed to enhance your LinkedIn experience by 
 1. Clone the repository to your local machine.
 
    ```bash
-   git clone https://github.com/yourusername/KilledIn.git
+   git clone https://github.com/samsour/killed-in.git
    ```
 
 2. Open your browser and navigate to the extensions page:
@@ -64,7 +64,7 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ## Disclaimer
 
