@@ -13,26 +13,32 @@
     "findet das lustig",
   ];
 
-  const placeholderMessages = [
-    "KilledIn: This content was too spicy for LinkedIn.",
-    "KilledIn: We saved you from this LinkedIn drama.",
-    "KilledIn: This post was too hot to handle.",
-    "KilledIn: Content removed for your sanity.",
-    "KilledIn: We thought you'd like a break from this.",
-    "KilledIn: This post was a bit too much.",
-    "KilledIn: We filtered out some noise for you.",
-    "KilledIn: This content was not LinkedIn-friendly.",
-    "KilledIn: We spared you from this post.",
-    "KilledIn: This was too spicy for your feed.",
-  ];
+  const placeholderMessages = {
+    "gefällt das":
+      "KilledIn: Jemand, den du kennst, mochte etwas Irrelevantes.",
+    "hat dies geteilt":
+      "KilledIn: Ein geteilter Beitrag, den du nicht sehen musst.",
+    folgt: "KilledIn: Jemand folgte etwas Unwichtigem.",
+    "hat das kommentiert":
+      "KilledIn: Ein Kommentar, auf den du verzichten kannst.",
+    Anzeige: "KilledIn: Eine Anzeige wurde zu deiner Beruhigung entfernt.",
+    "unterstützt dies":
+      "KilledIn: Unterstützung für etwas, das dich nicht interessiert.",
+    "findet das wunderbar":
+      "KilledIn: Ein wunderbarer Beitrag, den du nicht vermissen wirst.",
+    "Gratulieren Sie":
+      "KilledIn: Eine Glückwunschbotschaft, die du überspringen kannst.",
+    applaudiert: "KilledIn: Applaus für etwas, das deine Zeit nicht wert ist.",
+    "findet das lustig":
+      "KilledIn: Ein lustiger Beitrag, der nicht lustig genug war.",
+  };
 
-  function getRandomPlaceholder() {
-    const randomIndex = Math.floor(Math.random() * placeholderMessages.length);
-    return placeholderMessages[randomIndex];
+  function getPlaceholderMessage(forbiddenString) {
+    return placeholderMessages[forbiddenString] || "KilledIn: Content removed.";
   }
 
   function containsForbiddenString(element) {
-    return forbiddenStrings.some((str) =>
+    return forbiddenStrings.find((str) =>
       element.textContent.toLowerCase().includes(str.toLowerCase())
     );
   }
@@ -41,19 +47,22 @@
     mutation.addedNodes.forEach((node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
         // Check the node itself
-        if (containsForbiddenString(node)) {
+        const forbiddenString = containsForbiddenString(node);
+        if (forbiddenString) {
           console.log("Text containing forbidden keyword: ", node.textContent);
-          removeParentContainer(node);
+          removeParentContainer(node, forbiddenString);
         } else {
           // Traverse the entire subtree of the node
           const allDescendants = node.querySelectorAll("*");
           allDescendants.forEach((descendant) => {
-            if (containsForbiddenString(descendant)) {
+            const forbiddenStringDescendant =
+              containsForbiddenString(descendant);
+            if (forbiddenStringDescendant) {
               console.log(
                 "Text containing forbidden keyword: ",
                 descendant.textContent
               );
-              removeParentContainer(descendant);
+              removeParentContainer(descendant, forbiddenStringDescendant);
             }
           });
         }
@@ -61,7 +70,7 @@
     });
   }
 
-  function removeParentContainer(element) {
+  function removeParentContainer(element, forbiddenString) {
     let currentElement = element;
     while (
       currentElement &&
@@ -72,7 +81,7 @@
     if (currentElement) {
       console.log("Evicting the parent container: ", currentElement);
       const placeholder = document.createElement("div");
-      placeholder.textContent = getRandomPlaceholder();
+      placeholder.textContent = getPlaceholderMessage(forbiddenString);
       placeholder.style.padding = "0 0.5rem";
       placeholder.style.fontSize = "11px";
       placeholder.style.color = "rgba(0, 0, 0, 0.5)";
