@@ -53,7 +53,12 @@
     }
     if (currentElement) {
       console.log("Removing parent container: ", currentElement);
-      currentElement.remove();
+      const placeholder = document.createElement("div");
+      placeholder.textContent = "Content removed due to forbidden keyword.";
+      placeholder.style.padding = "0 0.5rem";
+      placeholder.style.fontSize = "11px";
+      placeholder.style.color = "rgba(0, 0, 0, 0.5)";
+      currentElement.parentElement.replaceChild(placeholder, currentElement);
     }
   }
 
