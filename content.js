@@ -13,6 +13,24 @@
     "findet das lustig",
   ];
 
+  const placeholderMessages = [
+    "KilledIn: This content was too spicy for LinkedIn.",
+    "KilledIn: We saved you from this LinkedIn drama.",
+    "KilledIn: This post was too hot to handle.",
+    "KilledIn: Content removed for your sanity.",
+    "KilledIn: We thought you'd like a break from this.",
+    "KilledIn: This post was a bit too much.",
+    "KilledIn: We filtered out some noise for you.",
+    "KilledIn: This content was not LinkedIn-friendly.",
+    "KilledIn: We spared you from this post.",
+    "KilledIn: This was too spicy for your feed.",
+  ];
+
+  function getRandomPlaceholder() {
+    const randomIndex = Math.floor(Math.random() * placeholderMessages.length);
+    return placeholderMessages[randomIndex];
+  }
+
   function containsForbiddenString(element) {
     return forbiddenStrings.some((str) =>
       element.textContent.toLowerCase().includes(str.toLowerCase())
@@ -52,9 +70,9 @@
       currentElement = currentElement.parentElement;
     }
     if (currentElement) {
-      console.log("Removing parent container: ", currentElement);
+      console.log("Evicting the parent container: ", currentElement);
       const placeholder = document.createElement("div");
-      placeholder.textContent = "Content removed due to forbidden keyword.";
+      placeholder.textContent = getRandomPlaceholder();
       placeholder.style.padding = "0 0.5rem";
       placeholder.style.fontSize = "11px";
       placeholder.style.color = "rgba(0, 0, 0, 0.5)";
