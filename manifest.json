@@ -1,17 +1,24 @@
 {
   "manifest_version": 3,
-  "name": "DOM Watcher and Filter",
+  "name": "KilledIn",
   "version": "1.0",
-  "description": "Watches a webpage for added elements and removes them based on specific text content.",
+  "description": "Watches LinkedIn for added elements and removes them based on specific text content.",
   "permissions": ["scripting"],
-  "host_permissions": ["<all_urls>"],
+  "host_permissions": ["https://www.linkedin.com/feed"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://www.linkedin.com/feed/"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "assets/logo-48.png",
+      "128": "assets/logo-128.png"
+    }
+  }
 }
