@@ -42,19 +42,7 @@ KilledIn is a browser extension designed to enhance your LinkedIn experience by 
 ### Code Structure
 
 - **manifest.json**: Defines the extension's metadata and permissions.
-
-  ```json:manifest.json
-  startLine: 1
-  endLine: 25
-  ```
-
 - **content.js**: Contains the logic for monitoring and modifying the LinkedIn feed.
-
-  ```javascript:content.js
-  startLine: 1
-  endLine: 50
-  ```
-
 - **popup.html**: Provides the UI for the extension's popup.
 - **popup.js**: Handles interactions within the popup.
 
@@ -72,4 +60,4 @@ KilledIn is not affiliated with LinkedIn in any way. In fact, LinkedIn probably 
 
 ## Contact
 
-For questions or feedback, please contact [yourname@example.com](mailto:yourname@example.com).
+For questions or feedback, please contact [anotexistingsupport@website.com](mailto:anotexistingsupport@website.com).
